@@ -6,7 +6,7 @@ class Application extends React.Component {
   render() {
     return (
       <div>
-        <h1>WTF, React With Redux</h1>
+        <h1>WTF, React With Redux is awesome</h1>
       </div>
 
     )

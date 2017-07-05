@@ -1,16 +1,25 @@
-import React from 'react'
+// import React from 'react'
 import ReactDOM from 'react-dom'
 
 
 const MOUNT_NODE = document.getElementById('root');
 
-let render = () => {
-  const App = require('./components/App').default;
+// Rendering a React APP
+// let render = () => {
+//   const App = require('./components/App').default;
+//
+//   ReactDOM.render(
+//     <App />,
+//     MOUNT_NODE
+//   )
+// };
 
-  ReactDOM.render(
-    <App />,
-    MOUNT_NODE
-  )
+// Rendering via Vanilla JS without react.
+let render = () => {
+  let h1div = document.createElement('h1');
+  h1div.appendChild(document.createTextNode('Hello from vannila JS'));
+
+  MOUNT_NODE.appendChild(h1div);
 };
 
 
