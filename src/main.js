@@ -1,4 +1,4 @@
-// import React from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom';
 import expect from 'expect';
 
@@ -78,25 +78,32 @@ const store = createStore(counter);
 
 console.log("store initial state: ", store.getState());
 
+// Dumb counter component --- As it has no business logic.
+const Counter = (props) => (
+  <div>
+    <h1>{props.value}</h1>
+    <button onClick={props.onIncrement}>+</button>
+    <button onClick={props.onDecrement}>-</button>
+  </div>
+);
 
-// Rendering via Vanilla JS using Redux store without react.
+// Rendering via React using Redux store.
 let render = () => {
 
-  let h1div = document.createElement('h1');
-  h1div.appendChild(document.createTextNode('Click anywhere !!'));
-
-  MOUNT_NODE.appendChild(h1div);
-
-  store.subscribe(() => {
-    h1div.innerText = store.getState();
-  }) ;
-
-  document.addEventListener('click', () => {
-    store.dispatch({ type : 'INCREMENT'} )
-  });
+  ReactDOM.render(
+    <Counter
+      value={store.getState()}
+      onIncrement={() => (
+        store.dispatch({ type : 'INCREMENT' })
+      )}
+      onDecrement={() => (
+        store.dispatch({ type : 'DECREMENT' })
+      )}
+    />, MOUNT_NODE);
 
 };
 
+store.subscribe(render) ;
 
 // Development Tools
 // ------------------------------------
