@@ -2,6 +2,9 @@
 import ReactDOM from 'react-dom';
 import expect from 'expect';
 
+import { createStore } from 'redux';
+
+
 const MOUNT_NODE = document.getElementById('root');
 
 // Rendering a React APP
@@ -47,12 +50,26 @@ const counter = (state = 0, action) => {
   }
 };
 
-// Rendering via Vanilla JS without react.
+const store = createStore(counter);
+
+console.log("store initial state: ", store.getState());
+
+
+// Rendering via Vanilla JS using Redux store without react.
 let render = () => {
+
   let h1div = document.createElement('h1');
-  h1div.appendChild(document.createTextNode('Hello from Vanilla JS' ));
+  h1div.appendChild(document.createTextNode('Click anywhere !!'));
 
   MOUNT_NODE.appendChild(h1div);
+
+  store.subscribe(() => {
+    h1div.innerText = store.getState();
+  }) ;
+
+  document.addEventListener('click', () => {
+    store.dispatch({ type : 'INCREMENT'} )
+  });
 
 };
 
