@@ -42,6 +42,10 @@ const MOUNT_NODE = document.getElementById('root');
 // };
 //
 
+
+// -------------------------------------
+
+// SIMPLIFIED STORE IMPLEMENTATION
 const createStore = (reducer) => {
   let state;
   let listeners = [];
@@ -66,6 +70,9 @@ const createStore = (reducer) => {
   return { getState, dispatch, subscribe };
 };
 
+// -------------------------------------
+
+// REDUCER
 const counter = (state = 0, action) => {
   switch (action.type) {
     case 'INCREMENT': return state + 1;
@@ -74,22 +81,17 @@ const counter = (state = 0, action) => {
   }
 };
 
+// -------------------------------------
+
+
 const store = createStore(counter);
 
 console.log("store initial state: ", store.getState());
 
-// Dumb counter component --- As it has no business logic.
-const Counter = (props) => (
-  <div>
-    <h1>{props.value}</h1>
-    <button onClick={props.onIncrement}>+</button>
-    <button onClick={props.onDecrement}>-</button>
-  </div>
-);
-
 // Rendering via React using Redux store.
-let render = () => {
+import Counter from 'routes/Counter';
 
+let render = () => {
   ReactDOM.render(
     <Counter
       value={store.getState()}
