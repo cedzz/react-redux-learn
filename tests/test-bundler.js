@@ -5,6 +5,7 @@ import dirtyChai from 'dirty-chai'
 import chaiAsPromised from 'chai-as-promised'
 import sinonChai from 'sinon-chai'
 import chaiEnzyme from 'chai-enzyme'
+import deepFreeze from 'deep-freeze';
 
 // Mocha / Chai
 // ------------------------------------
@@ -14,6 +15,7 @@ chai.should();
 global.chai = chai;
 global.expect = chai.expect;
 global.sinon = sinon;
+global.deepFreeze = deepFreeze;
 
 // Chai Plugins
 // ------------------------------------
