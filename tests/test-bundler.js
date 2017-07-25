@@ -8,31 +8,33 @@ import chaiEnzyme from 'chai-enzyme'
 
 // Mocha / Chai
 // ------------------------------------
-mocha.setup({ ui: 'bdd' })
-chai.should()
+mocha.setup({ ui: 'bdd' });
+chai.should();
 
-global.chai = chai
-global.expect = chai.expect
-global.sinon = sinon
+global.chai = chai;
+global.expect = chai.expect;
+global.sinon = sinon;
 
 // Chai Plugins
 // ------------------------------------
-chai.use(chaiEnzyme())
-chai.use(dirtyChai)
-chai.use(chaiAsPromised)
-chai.use(sinonChai)
+chai.use(chaiEnzyme());
+chai.use(dirtyChai);
+chai.use(chaiAsPromised);
+chai.use(sinonChai);
 
 // Test Importer
 // ------------------------------------
 // We use a Webpack global here as it is replaced with a string during compile.
 // Using a regular JS variable is not statically analyzable so webpack will throw warnings.
-const testsContext = require.context('./', true, /\.(spec|test)\.(js|ts|tsx)$/)
+const testsContext = require.context('./', true, /\.(spec|test)\.(js|ts|tsx)$/);
 
 // When a test file changes, only rerun that spec file. If something outside of a
 // test file changed, rerun all tests.
 // https://www.npmjs.com/package/karma-webpack-with-fast-source-maps
-const __karmaWebpackManifest__ = []
-const allTests = testsContext.keys()
+const __karmaWebpackManifest__ = [];
+
+const allTests = testsContext.keys();
+
 const changedTests = allTests.filter(path => {
   return __karmaWebpackManifest__.indexOf(path) !== -1
 })
