@@ -1,3 +1,4 @@
+import { combineReducers } from 'redux';
 
 // --------------------------------------------
 // ACTION HANDLERS
@@ -73,11 +74,19 @@ const visibilityFilter = (state = 'SHOW_ALL', action) => {
 
 
 // Another example of Reducer Composition pattern
-const todoAppReducer = (state = {}, action) => {
-  return {
-    todos : todos(state.todos, action),
-    visibilityFilter : visibilityFilter(state.visibilityFilter, action)
-  }
-};
+// const todoAppReducer = (state = {}, action) => {
+//   return {
+//     todos : todos(state.todos, action),
+//     visibilityFilter : visibilityFilter(state.visibilityFilter, action)
+//   }
+// };
 
-export default todosReducer;
+// Redux provide a combineReducers utility to generate a root reducer and
+// avoid the above code to write by hand.
+const todoAppReducer = combineReducers({
+  todos: todosReducer,
+  visibilityFilter : visibilityFilter
+});
+
+
+export default todoAppReducer;
