@@ -39,9 +39,9 @@ describe('(Action) Add Todo', () => {
 
     const stateAfter = [
       {
-        type : 'ADD_TODO',
         id : 0,
-        text : "Learning Redux"
+        text : "Learning Redux",
+        completed : false
       }
     ];
 
@@ -53,5 +53,9 @@ describe('(Action) Add Todo', () => {
     ).toEqual(stateAfter)
 
   });
+});
+
+
+describe('( Reducer ) todoReducer', () => {
 
 });

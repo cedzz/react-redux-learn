@@ -12,9 +12,13 @@ export const toggleTodo = (todo) => {
   }
 };
 
-export const addTodo = (state, newTodo) => {
+export const addTodo = (state, action) => {
   return [
-    ...state, newTodo
+    ...state, {
+      id : action.id,
+      text : action.text,
+      completed : false
+    }
   ];
 };
 
@@ -22,11 +26,17 @@ const todoReducer = (state= [], action) => {
 
   switch(action.type) {
     case 'ADD_TODO':
-      return addTodo(state, {
-        id : action.id,
-        text : action.text,
-        completed : false
+      return addTodo(state, action);
+
+    case 'TOGGLE_TODO':
+      return state.map((todo) => {
+        if (todo.id == action.id ) {
+          return toggleTodo(todo)
+        } else {
+          return todo
+        }
       });
+
     default:
       return state
   }
