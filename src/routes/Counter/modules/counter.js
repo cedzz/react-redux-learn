@@ -54,3 +54,18 @@ export default function counterReducer (state = initialState, action) {
 
   return handler ? handler(state, action) : state
 }
+
+
+// ------------------------------------
+// NEW reducer
+// ------------------------------------
+
+
+// REDUCER
+export const counter = (state = 0, action) => {
+  switch (action.type) {
+    case 'INCREMENT': return state + 1;
+    case 'DECREMENT' : return state - 1;
+    default : return state;
+  }
+};

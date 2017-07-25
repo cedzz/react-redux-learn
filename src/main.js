@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom';
 import expect from 'expect';
 
-// import { createStore } from 'redux';
+import { counter } from 'routes/Counter/modules/counter';
 
 
 const MOUNT_NODE = document.getElementById('root');
@@ -17,30 +17,6 @@ const MOUNT_NODE = document.getElementById('root');
 //   )
 // };
 
-
-// let runTests = () => {
-//   expect(
-//     counter(0, { type : 'INCREMENT' })
-//   ).toEqual(1);
-//
-//   expect(
-//     counter(1, { type : 'INCREMENT' })
-//   ).toEqual(2);
-//
-//   expect(
-//     counter(2, { type : 'DECREMENT' })
-//   ).toEqual(1);
-//
-//   expect(
-//     counter(1, { type : 'DECREMENT' })
-//   ).toEqual(0);
-//
-//   expect(
-//     counter(undefined, {})
-//   ).toEqual(0);
-//   console.log("All Tests Passed!! Hurray !! ");
-// };
-//
 
 
 // -------------------------------------
@@ -68,17 +44,6 @@ const createStore = (reducer) => {
   dispatch({});
 
   return { getState, dispatch, subscribe };
-};
-
-// -------------------------------------
-
-// REDUCER
-const counter = (state = 0, action) => {
-  switch (action.type) {
-    case 'INCREMENT': return state + 1;
-    case 'DECREMENT' : return state - 1;
-    default : return state;
-  }
 };
 
 // -------------------------------------
