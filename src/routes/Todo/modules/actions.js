@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+// import { combineReducers } from 'redux';
 
 // --------------------------------------------
 // ACTION HANDLERS
@@ -25,6 +25,19 @@ export const addTodo = (state, action) => {
       completed : false
     }
   ];
+};
+
+
+// --------------------------------------------
+// combineReducers -- Simplified version
+// --------------------------------------------
+
+const combineReducers = (reducers) => {
+  return (state = {}, action) => {
+    return Object.keys(reducers).reduce((nextState, key) => {
+        nextState[key] = reducers[key](state[key], action)
+    });
+  }
 };
 
 
