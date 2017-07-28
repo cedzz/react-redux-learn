@@ -31,7 +31,7 @@ export const addTodo = (state, action) => {
 // --------------------------------------------
 // combineReducers -- Simplified version
 // --------------------------------------------
-
+//
 const combineReducers = (reducers) => {
   return (state = {}, action) => {
     return Object.keys(reducers).reduce((nextState, key) => {
@@ -60,7 +60,7 @@ const todoReducer = (state, action) => {
 // Reducer acting on multiple todoitems. It uses todoReducer to manage the state of
 // a single object other that the list of todoitems
 // THIS iS CALLED REDUCER COMPOSITION
-const todosReducer = (state= [], action) => {
+export const todosReducer = (state= [], action) => {
 
   switch(action.type) {
     case 'ADD_TODO':

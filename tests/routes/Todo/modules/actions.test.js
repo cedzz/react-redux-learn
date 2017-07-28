@@ -1,6 +1,6 @@
 import Expect from 'expect';
 
-import { toggleTodo, addTodo } from 'routes/Todo/modules/actions';
+import { toggleTodo, addTodo, todosReducer } from 'routes/Todo/modules/actions';
 
 describe('(Action) Toggle Todo ' , () => {
 
@@ -56,6 +56,45 @@ describe('(Action) Add Todo', () => {
 });
 
 
-describe('( Reducer ) todoReducer', () => {
+describe('( Reducer ) todosReducer', () => {
+  const stateBefore = [
+    {
+      id : 0,
+      text : "Learning Redux",
+      completed : false
+    }
+  ];
 
+  it('should add todo on ADD_TODO action', () => {
+    const stateAfter = [
+      {
+        id : 0,
+        text : "Learning Redux",
+        completed : false
+      },
+      {
+        id : 1,
+        text : "Learn Redux-Router",
+        completed : false
+      }
+    ];
+
+    const action = {
+      type :"ADD_TODO",
+      text : 'Learn Redux-Router',
+      id : 1
+    };
+
+    deepFreeze(stateBefore);
+    deepFreeze(action);
+
+    Expect(
+      todosReducer(stateBefore, action)
+    ).toEqual(stateAfter)
+
+  });
+
+  it( 'should toggle todo on TOGGLE_TODO action', () => {
+
+  });
 });
