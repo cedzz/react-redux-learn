@@ -78,33 +78,10 @@ console.log("store initial state: ", store.getState());
 
 import TodoApp from 'routes/Todo';
 
-let nextTodoId = 0;
-
 
 let render = () => {
   ReactDOM.render(
-    <TodoApp
-      store={store}
-
-      addTodo={(input_node) => {
-          store.dispatch({
-            type: 'ADD_TODO', text: input_node.value, id: nextTodoId++
-          });
-          input_node.value = '';
-        }
-      }
-      toggleTodo={(id) => {
-        return () => {
-          store.dispatch({
-            type : 'TOGGLE_TODO',
-            id : id
-          })
-          }
-        }
-      }
-      todos={store.getState().todos}
-      visibilityFilter={store.getState().visibilityFilter}
-    />,
+    <TodoApp store={store} />,
     MOUNT_NODE
   )
 };
