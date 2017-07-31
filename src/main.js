@@ -90,6 +90,15 @@ let render = () => {
           input_node.value = '';
         }
       }
+      toggleTodo={(id) => {
+        return () => {
+          store.dispatch({
+            type : 'TOGGLE_TODO',
+            id : id
+          })
+          }
+        }
+      }
       todos={store.getState().todos}
     />,
     MOUNT_NODE

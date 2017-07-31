@@ -53,7 +53,7 @@ const todoReducer = (state, action) => {
     case 'ADD_TODO':
       return addTodo(state, action);
     case 'TOGGLE_TODO':
-       return state.id == action.id ? toggleTodo(todo) : todo;
+       return state.id == action.id ? toggleTodo(state) : state;
     default:
       return state
   }

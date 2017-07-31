@@ -11,6 +11,7 @@ class TodoApp extends React.Component {
     this.props.addTodo(this.input);
   }
 
+
   render() {
     return (
       <div>
@@ -20,7 +21,13 @@ class TodoApp extends React.Component {
         </button>
         <ul>
           { this.props.todos.map((todo) => (
-            <li key={todo.id}>{todo.text}</li>
+            <li
+              key={todo.id}
+              onClick={this.props.toggleTodo.call(this, todo.id)}
+              style={{ textDecoration : todo.completed ? 'line-through' : 'none'}}
+            >
+                {todo.text}
+            </li>
             )
           )}
         </ul>
