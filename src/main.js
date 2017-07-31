@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
-import expect from 'expect';
 
 import { counter } from 'routes/Counter/modules/counter';
 
+import todoAppReducer  from 'routes/Todo/modules/actions';
 
 const MOUNT_NODE = document.getElementById('root');
 
@@ -49,26 +49,53 @@ const createStore = (reducer) => {
 // -------------------------------------
 
 
-const store = createStore(counter);
+// const store = createStore(counter);
+
+const store = createStore(todoAppReducer);
 
 console.log("store initial state: ", store.getState());
 
+
+// ----------------------------------------------
 // Rendering via React using Redux store.
-import Counter from 'routes/Counter';
+// import Counter from 'routes/Counter';
+// let render = () => {
+//   ReactDOM.render(
+//     <Counter
+//       value={store.getState()}
+//       onIncrement={() => (
+//         store.dispatch({ type : 'INCREMENT' })
+//       )}
+//       onDecrement={() => (
+//         store.dispatch({ type : 'DECREMENT' })
+//       )}
+//     />, MOUNT_NODE);
+//
+// };
+// ----------------------------------------------
+
+
+
+import TodoApp from 'routes/Todo';
+
+let nextTodoId = 0;
 
 let render = () => {
   ReactDOM.render(
-    <Counter
-      value={store.getState()}
-      onIncrement={() => (
-        store.dispatch({ type : 'INCREMENT' })
-      )}
-      onDecrement={() => (
-        store.dispatch({ type : 'DECREMENT' })
-      )}
-    />, MOUNT_NODE);
-
+    <TodoApp
+      addTodo={(input_node) => {
+          store.dispatch({
+            type: 'ADD_TODO', text: input_node.value, id: nextTodoId++
+          });
+          input_node.value = '';
+        }
+      }
+      todos={store.getState().todos}
+    />,
+    MOUNT_NODE
+  )
 };
+
 
 store.subscribe(render) ;
 

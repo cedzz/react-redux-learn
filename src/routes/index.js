@@ -13,7 +13,22 @@ export const createRoutes = (store) => ({
   childRoutes : [
     CounterRoute(store)
   ]
-})
+});
+
+const asyncCreateRoutes = (store) => (
+  {
+    path          : '/',
+    component     : CoreLayout,
+    indexRoute    : Home,
+    getChildRoutes: function(location, cb) {
+      require.ensure([], (require) => {
+        cb(null, [
+          require('./Counter').default(store)
+        ])
+      })
+    }
+  }
+);
 
 /*  Note: childRoutes can be chunked or otherwise loaded programmatically
     using getChildRoutes with the following signature:
