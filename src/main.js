@@ -80,9 +80,12 @@ import TodoApp from 'routes/Todo';
 
 let nextTodoId = 0;
 
+
 let render = () => {
   ReactDOM.render(
     <TodoApp
+      store={store}
+
       addTodo={(input_node) => {
           store.dispatch({
             type: 'ADD_TODO', text: input_node.value, id: nextTodoId++
@@ -100,6 +103,7 @@ let render = () => {
         }
       }
       todos={store.getState().todos}
+      visibilityFilter={store.getState().visibilityFilter}
     />,
     MOUNT_NODE
   )
