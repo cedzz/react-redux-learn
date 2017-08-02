@@ -49,15 +49,7 @@ class TodoApp extends React.Component {
           />
         </ul>
 
-        <Footer
-          visibilityFilter={visibilityFilter}
-          onFilterClick={(filter) => {
-            this.props.store.dispatch({
-              type: "SET_VISIBILITY_FILTER",
-              filter : filter
-            })
-          }}
-        />
+        <Footer />
       </div>
     )
   }
