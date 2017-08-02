@@ -78,10 +78,27 @@ console.log("store initial state: ", store.getState());
 
 import TodoApp from 'routes/Todo';
 
+class Provider extends React.Component {
+  getChildContext() {
+    return {
+      store: this.props.store
+    }
+  }
+
+  render() {
+    return this.props.children;
+  }
+}
+
+Provider.childContextTypes = {
+  store : React.PropTypes.object
+};
 
 let render = () => {
   ReactDOM.render(
-    <TodoApp store={store} />,
+    <Provider store={store} >
+        <TodoApp  />
+    </Provider>,
     MOUNT_NODE
   )
 };

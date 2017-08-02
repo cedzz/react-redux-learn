@@ -2,27 +2,24 @@ import React from 'react';
 import FilterLink from './FilterLink';
 
 
-const Footer = ({store}) => {
+const Footer = () => {
 
   return (
     <p>
       <FilterLink
         filter="SHOW_ALL"
-        store={store}
       >
         ALL
       </FilterLink>
       {' '}
       <FilterLink
         filter="SHOW_ACTIVE"
-        store={store}
       >
         ACTIVE
       </FilterLink>
       {' '}
       <FilterLink
         filter="SHOW_COMPLETED"
-        store={store}
       >
         COMPLETED
       </FilterLink>
