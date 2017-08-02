@@ -86,9 +86,6 @@ let render = () => {
   )
 };
 
-
-store.subscribe(render) ;
-
 // Development Tools
 // ------------------------------------
 if (__DEV__) {
