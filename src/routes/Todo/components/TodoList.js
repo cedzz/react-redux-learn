@@ -1,5 +1,7 @@
 import React from 'react';
 import Todo from './Todo';
+import {connect } from 'react-redux';
+
 
 const getVisibleTodos = (todos, visibilityFilter) => {
   switch(visibilityFilter) {
@@ -12,41 +14,66 @@ const getVisibleTodos = (todos, visibilityFilter) => {
   }
 };
 
-class VisibleTodoList extends React.Component {
-  componentDidMount() {
-    const { store } = this.context;
-    this.unsubscribe = store.subscribe(() => {
-      this.forceUpdate();
-    })
+const mapStateToProps = (state) => {
+  return {
+    todos : getVisibleTodos(state.todos, state.visibilityFilter)
   }
-
-  componentWillUnmount() {
-    this.unsubscribe();
-  }
-
-  render() {
-    const { store } = this.context;
-    const state = store.getState();
-
-    return (
-      <TodoList
-        todos={
-          getVisibleTodos(state.todos, state.visibilityFilter)
-        }
-        onTodoClick={(id) => {
-          store.dispatch({
-            type : 'TOGGLE_TODO',
-            id : id
-          })
-        }}
-      />
-    )
-  }
-}
-
-VisibleTodoList.contextTypes = {
-  store : React.PropTypes.object
 };
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onTodoClick : (id) => {
+      dispatch({
+        type : 'TOGGLE_TODO',
+        id : id
+      })
+    }
+  }
+};
+
+
+// -------------------------------------------------
+// Explanation of how connects work implicitly as an HOC component
+// -------------------------------------------------
+// class VisibleTodoList extends React.Component {
+//   componentDidMount() {
+//     const { store } = this.context;
+//     this.unsubscribe = store.subscribe(() => {
+//       this.forceUpdate();
+//     })
+//   }
+//
+//   componentWillUnmount() {
+//     this.unsubscribe();
+//   }
+//
+//   render() {
+//     const { store } = this.context;
+//     const state = store.getState();
+//
+//     return (
+//       <TodoList
+//         todos={
+//           getVisibleTodos(state.todos, state.visibilityFilter)
+//         }
+//         onTodoClick={(id) => {
+//           store.dispatch({
+//             type : 'TOGGLE_TODO',
+//             id : id
+//           })
+//         }}
+//       />
+//     )
+//   }
+// }
+//
+// VisibleTodoList.contextTypes = {
+//   store : React.PropTypes.object
+// };
+
+// -------------------------------------------------
+
+
 
 const TodoList = ({
   todos, onTodoClick
@@ -60,5 +87,11 @@ const TodoList = ({
       />)}
   </ul>
 );
+
+const VisibleTodoList = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TodoList);
+
 
 export default VisibleTodoList;
