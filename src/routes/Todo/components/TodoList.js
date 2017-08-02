@@ -14,7 +14,10 @@ const getVisibleTodos = (todos, visibilityFilter) => {
 
 class VisibleTodoList extends React.Component {
   componentDidMount() {
-    this.unsubscribe = store.subscribe(() => this.forceUpdate())
+    const { store } = this.props;
+    this.unsubscribe = store.subscribe(() => {
+      this.forceUpdate();
+    })
   }
 
   componentWillUnmount() {
@@ -22,6 +25,7 @@ class VisibleTodoList extends React.Component {
   }
 
   render() {
+    const { store } = this.props;
     const state = store.getState();
 
     return (
@@ -47,7 +51,7 @@ const TodoList = ({
     {todos.map(todo =>
       <Todo
         key={todo.id}
-        onClick={onTodoClick.call(this, todo.id)}
+        onClick={() => onTodoClick(todo.id)}
         {...todo}
       />)}
   </ul>

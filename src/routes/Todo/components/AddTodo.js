@@ -2,7 +2,7 @@ import React from 'react';
 
 let nextTodoId = 0;
 
-const AddTodo = () => {
+const AddTodo = ({ store }) => {
   let input;
   return (
     <div>
@@ -13,7 +13,7 @@ const AddTodo = () => {
           text: input.value,
           id: nextTodoId++
         });
-        input_node.value = '';
+        input.value = '';
       }}>
         Add Todo
       </button>
