@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 
 import { counter } from 'routes/Counter/modules/counter';
 
@@ -74,25 +75,26 @@ console.log("store initial state: ", store.getState());
 // };
 // ----------------------------------------------
 
+//
+// class Provider extends React.Component {
+//   getChildContext() {
+//     return {
+//       store: this.props.store
+//     }
+//   }
+//
+//   render() {
+//     return this.props.children;
+//   }
+// }
+//
+// Provider.childContextTypes = {
+//   store : React.PropTypes.object
+// };
+// ----------------------------------------------
 
 
 import TodoApp from 'routes/Todo';
-
-class Provider extends React.Component {
-  getChildContext() {
-    return {
-      store: this.props.store
-    }
-  }
-
-  render() {
-    return this.props.children;
-  }
-}
-
-Provider.childContextTypes = {
-  store : React.PropTypes.object
-};
 
 let render = () => {
   ReactDOM.render(
